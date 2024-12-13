@@ -1,24 +1,24 @@
+//FCFS -- FIRST COME FIRST SERVE NON-PREEMPTIVE IN C LANGUAGE
+
 #include <stdio.h>
 #include <stdlib.h>
 
 struct Process {
-    int pid;            // Process ID
-    int arrival_time;   // Arrival time
-    int burst_time;     // Burst time
-    int completion_time;// Completion time
-    int turnaround_time;// Turnaround time
-    int waiting_time;   // Waiting time
-    int start_time;     // Start time for Gantt chart
+    int pid;         
+    int arrival_time;   
+    int burst_time;    
+    int completion_time;
+    int turnaround_time;
+    int waiting_time;   
+    int start_time;     
 };
 
-// Function to swap two processes
 void swap(struct Process *a, struct Process *b) {
     struct Process temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// Function to sort processes by arrival time
 void sortByArrivalTime(struct Process processes[], int n) {
     for(int i = 0; i < n-1; i++) {
         for(int j = 0; j < n-i-1; j++) {
@@ -29,7 +29,6 @@ void sortByArrivalTime(struct Process processes[], int n) {
     }
 }
 
-// Function to calculate completion, turnaround, and waiting times
 void calculateTimes(struct Process processes[], int n) {
     int current_time = 0;
     
@@ -46,18 +45,15 @@ void calculateTimes(struct Process processes[], int n) {
     }
 }
 
-// Function to draw Gantt chart
 void drawGanttChart(struct Process processes[], int n) {
     int total_time = processes[n-1].completion_time;
     int scale_factor = 1;
     
-    // Adjust scale factor if total time is too large
     if(total_time > 50) {
         scale_factor = (total_time / 50) + 1;
     }
     printf("|");
     
-    // Print process IDs
     for(int i = 0; i < n; i++) {
         int duration = processes[i].burst_time;
         for(int j = 0; j < duration/scale_factor - 1; j++){
@@ -93,7 +89,6 @@ int main() {
     
     struct Process processes[n];
     
-    // Input process details
     for(int i = 0; i < n; i++) {
         processes[i].pid = i + 1;
         printf("\nFor Process %d:\n", i + 1);
@@ -103,13 +98,10 @@ int main() {
         scanf("%d", &processes[i].burst_time);
     }
     
-    // Sort processes by arrival time
     sortByArrivalTime(processes, n);
     
-    // Calculate times
     calculateTimes(processes, n);
     
-    // Print process details
     printf("\nPID\tArrival\tBurst\tStart\tCompletion\tTurnaround\tWaiting\n");
     printf("-------------------------------------------------------------------------\n");
     
@@ -127,14 +119,12 @@ int main() {
         avg_turnaround_time += processes[i].turnaround_time;
     }
     
-    // Calculate and print average times
     avg_waiting_time /= n;
     avg_turnaround_time /= n;
     
     printf("\nAverage Waiting Time: %.2f", avg_waiting_time);
     printf("\nAverage Turnaround Time: %.2f\n", avg_turnaround_time);
     
-    // Draw Gantt chart
     drawGanttChart(processes, n);
     
     return 0;
