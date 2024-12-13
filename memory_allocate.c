@@ -1,3 +1,5 @@
+// MEMORY ALLOCATION TECHNIQUE - FIRST FIT, BEST FIT AND WORST FIT IN C LANGUAGE
+
 #include <stdio.h>
 #include <limits.h>
 
@@ -24,11 +26,9 @@ void firstFit(int blocks[], int processes[], int n, int m) {
     int allocation[MAX_PROCESS];
     int occupied[MAX_BLOCKS] = {0};
     
-    // Initialize allocation array with -1
     for(int i = 0; i < m; i++)
         allocation[i] = -1;
     
-    // Allocate memory to processes using First Fit
     for(int i = 0; i < m; i++) {
         for(int j = 0; j < n; j++) {
             if(!occupied[j] && blocks[j] >= processes[i]) {
@@ -39,7 +39,6 @@ void firstFit(int blocks[], int processes[], int n, int m) {
         }
     }
     
-    // Print allocation details
     printf("\nFirst Fit Allocation:\n");
     printf("Process No.\tProcess Size\tBlock No.\n");
     for(int i = 0; i < m; i++) {
@@ -56,7 +55,6 @@ void bestFit(int blocks[], int processes[], int n, int m) {
     int allocation[MAX_PROCESS];
     int occupied[MAX_BLOCKS] = {0};
     
-    // Initialize allocation array with -1
     for(int i = 0; i < m; i++)
         allocation[i] = -1;
     
@@ -97,7 +95,6 @@ void bestFit(int blocks[], int processes[], int n, int m) {
         }
     }
     
-    // Print allocation details
     printf("\nBest Fit Allocation:\n");
     printf("Process No.\tProcess Size\tBlock No.\n");
     for(int i = 0; i < m; i++) {
@@ -114,7 +111,6 @@ void worstFit(int blocks[], int processes[], int n, int m) {
     int allocation[MAX_PROCESS];
     int occupied[MAX_BLOCKS] = {0};
     
-    // Initialize allocation array with -1
     for(int i = 0; i < m; i++)
         allocation[i] = -1;
     
@@ -155,7 +151,6 @@ void worstFit(int blocks[], int processes[], int n, int m) {
         }
     }
     
-    // Print allocation details
     printf("\nWorst Fit Allocation:\n");
     printf("Process No.\tProcess Size\tBlock No.\n");
     for(int i = 0; i < m; i++) {
